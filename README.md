@@ -1,8 +1,8 @@
 # Tutorial de Procesamiento de Imágenes con Programación Genética
 Contenido del Tutorial de Procesamiento de Imágenes con Programación Genética del Encuentro Nacional de Computación (ENC) 2022
-![](https://github.com/hersan19/ENC2022-PI-GP/blob/main/enc2022-banner2.jpg | width=100px)
-![](https://github.com/hersan19/ENC2022-PI-GP/blob/main/covnnec.png | width=100px)
-![](https://github.com/hersan19/ENC2022-PI-GP/blob/main/zLogosimbolo_color.jpg | width=100px)
+![][[https://github.com/hersan19/ENC2022-PI-GP/blob/main/enc2022-banner2.jpg | width=100]]
+![][[https://github.com/hersan19/ENC2022-PI-GP/blob/main/covnnec.png | width=100]]
+![][[https://github.com/hersan19/ENC2022-PI-GP/blob/main/zLogosimbolo_color.jpg | width=100]]
 
 
 ## Instructores del grupo de investigación COVNNEC-APP:
