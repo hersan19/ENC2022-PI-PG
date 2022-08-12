@@ -12,21 +12,21 @@ Contenido del Tutorial de Procesamiento de Imágenes con Programación Genética
 
 ## Contenido del Tutorial
 1. Introducción al Procesamiento Digital de Imágenes
-  a. Visión por computadora
-  b. Procesamiento digital de imágenes
-  c. Operadores morfológicos
+  - Visión por computadora
+  - Procesamiento digital de imágenes
+  - Operadores morfológicos
 2. Aprendizaje Automático
-  a. Introducción al aprendizaje automático
-  b. Clasificadores
+  - Introducción al aprendizaje automático
+  - Clasificadores
     - K-NN
     - Decission Tree
     - Support Vector Machine
     - Artificial Neural Netwrorks
 3. Cómputo Evolutivo
-  a. Antecedentes 
-  b. Programación Genética
+  - Antecedentes 
+  - Programación Genética
 4. Aplicaciones
-  a. Procesamiento de imágenes con programación genética y clasificación.
+  - Procesamiento de imágenes con programación genética y clasificación.
 
 ## Requerimientos de cómputo:
   - Computadora con acceso a internet
