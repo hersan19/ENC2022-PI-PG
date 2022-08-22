@@ -24,7 +24,7 @@ Contenido del Tutorial de Procesamiento de Imágenes con Programación Genética
       - K-NN
       - Decission Tree
       - Support Vector Machine
-      - Artificial Neural Netwrorks
+      - Artificial Neural Networks
 3. Cómputo Evolutivo
     - Antecedentes 
     - Programación Genética
