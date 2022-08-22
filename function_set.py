@@ -12,7 +12,7 @@ import torch
 import kornia as K
 from kornia import morphology as morph
 
-splited = 2
+splited = 100
 
 #%% Funciones Morfológicas
 def Erosion(img_rgb):
@@ -129,7 +129,7 @@ def Sobel(img_rgb):
         torch.cuda.empty_cache()
         img = K.filters.sobel(img)
         # img = img.float()*255
-        # img = torch.clamp(img,min=0.0,max=255.0)
+        img = torch.clamp(img,min=0.0,max=1.0)
         img_rgb[contador]=img
         del img
         torch.cuda.empty_cache()
@@ -153,7 +153,7 @@ def LaPlacian(img_rgb):
         torch.cuda.empty_cache()
         img = K.filters.laplacian(img, kernel_size=5)
         # img = img.float()*255
-        # img = torch.clamp(img,min=0.0,max=255.0)
+        img = torch.clamp(img,min=0.0,max=1.0)
         img_rgb[contador]=img
         del img
         torch.cuda.empty_cache()
@@ -177,7 +177,7 @@ def Gradient(img_rgb):
         torch.cuda.empty_cache()
         img = morph.gradient(img, kernel)
         # img = img.float()*255
-        # img = torch.clamp(img,min=0.0,max=255.0)
+        img = torch.clamp(img,min=0.0,max=1.0)
         img_rgb[contador]=img
         del img
         torch.cuda.empty_cache()
@@ -200,7 +200,7 @@ def suma_imgs2(img1, img2):
     
     suma = img1+img2
     # suma = suma.float()*255
-    # suma = torch.clamp(suma, min=0.0,max=255.0)
+    suma = torch.clamp(suma, min=0.0,max=1.0)
     
     img1 = img1.to("cpu")
     img2 = img2.to("cpu")
@@ -220,7 +220,7 @@ def suma_imgs3(img1, img2, img3):
     
     suma = img1+img2+img3
     # suma = suma.float()*255
-    # suma = torch.clamp(suma, min=0.0,max=255.0)
+    suma = torch.clamp(suma, min=0.0,max=1.0)
     
     img1 = img1.to("cpu")
     img2 = img2.to("cpu")
@@ -286,96 +286,8 @@ def Gaussian_blur_2d(img_rgb):
     img_rgb: torch.Tensor = torch.cat(img_rgb,dim=0)
     img_rgb = img_rgb.to("cpu")
     torch.cuda.empty_cache()
+    # print(img_rgb.max(), img_rgb.min())
     return img_rgb
-
-
-# def Box_blur(img_rgb,kernel_size):
-#     """Box blur """
-#     print("Box_blur",kernel_size)
-#     device = "cuda:0"
-#     img_rgb = img_rgb.to(device)
-#     img_rgb :torch.Tensor = torch.split(img_rgb,splited)
-#     img_rgb = list(img_rgb)
-#     contador=0
-#     for img in img_rgb:
-#         img = img.float()/255
-#         torch.cuda.empty_cache()
-#         img = K.filters.box_blur(img, (kernel_size, kernel_size))
-#         img = img.float()*255
-#         img = torch.clamp(img,min=0.0,max=255.0)
-#         img_rgb[contador]=img
-#         del img
-#         torch.cuda.empty_cache()
-#         contador+=1
-#     img_rgb: torch.Tensor = torch.cat(img_rgb,dim=0)
-    
-#     img_rgb = img_rgb.to("cpu")
-#     #img_rgb = list(map(torch.stack, zip(*img_rgb)))
-#     torch.cuda.empty_cache()
-#     # print(torch.cuda.memory_allocated())
-#     # print('erosion\nEvaluation before:\t', torch.cuda.memory_allocated(), torch.cuda.memory_reserved())
-#     return img_rgb
-
-
-# def Mtn_blur(img_rgb,kernel_size,angle):
-#     """Motion blur 
-#     img_rgb = tensor in shape (B,C,H,W) 
-#     kernel_size = Must be an odd integer positive
-#     angle =  Must be a integer [1-90]
-#     """
-#     print("MTN_blur",kernel_size)
-#     device = "cuda:0"
-#     img_rgb = img_rgb.to(device)
-#     img_rgb :torch.Tensor = torch.split(img_rgb,splited)
-#     img_rgb = list(img_rgb)
-#     contador=0
-#     for img in img_rgb:
-#         img = img.float()/255
-#         torch.cuda.empty_cache()
-#         img = K.filters.motion_blur(img, kernel_size, angle, 1)
-#         img = img.float()*255
-#         img = torch.clamp(img,min=0.0,max=255.0)
-#         img_rgb[contador]=img
-#         del img
-#         torch.cuda.empty_cache()
-#         contador+=1
-#     img_rgb: torch.Tensor = torch.cat(img_rgb,dim=0)
-    
-#     img_rgb = img_rgb.to("cpu")
-#     #img_rgb = list(map(torch.stack, zip(*img_rgb)))
-#     torch.cuda.empty_cache()
-#     # print(torch.cuda.memory_allocated())
-#     # print('erosion\nEvaluation before:\t', torch.cuda.memory_allocated(), torch.cuda.memory_reserved())
-#     return img_rgb
-
-# def Sharpen(img_rgb,kernel_size,standar_deviation):
-#     """Sharpen """
-#     print("Sharpen",kernel_size,standar_deviation)
-#     device = "cuda:0"
-#     img_rgb = img_rgb.to(device)
-#     img_rgb :torch.Tensor = torch.split(img_rgb,splited)
-#     img_rgb = list(img_rgb)
-#     sharpen = K.filters.UnsharpMask((kernel_size,kernel_size), (standar_deviation,standar_deviation))
-#     contador=0
-#     for img in img_rgb:
-#         img = img.float()/255
-#         img = sharpen(img)
-#         img = img.float()*255
-#         img = torch.clamp(img,min=0.0,max=255.0)
-#         img_rgb[contador]=img
-#         del img
-#         torch.cuda.empty_cache()
-#         contador+=1
-#     img_rgb: torch.Tensor = torch.cat(img_rgb,dim=0)
-#     del sharpen
-    
-#     img_rgb = img_rgb.to("cpu")
-#     #img_rgb = list(map(torch.stack, zip(*img_rgb)))
-#     torch.cuda.empty_cache()
-#     # print(torch.cuda.memory_allocated())
-#     # print('erosion\nEvaluation before:\t', torch.cuda.memory_allocated(), torch.cuda.memory_reserved())
-
-#     return img_rgb
 
 def En_adbright(img_rgb):
     """Enhance adjust brightness
@@ -401,11 +313,12 @@ def En_adbright(img_rgb):
     img_rgb: torch.Tensor = torch.cat(img_rgb,dim=0) 
     img_rgb = img_rgb.to("cpu")
     torch.cuda.empty_cache()
-
+    # print(img_rgb.max(), img_rgb.min())
     return img_rgb
 
 
 def En_equal(img_rgb):
+    # print('before',img_rgb.max(), img_rgb.min())
     """Enhance adjust brightness """
     device = "cuda:0"
     img_rgb = img_rgb.to(device)
@@ -418,7 +331,7 @@ def En_equal(img_rgb):
         # img = (img.float()/255)
         img =  K.enhance.equalize(img)
         # img = img.float()*255
-        # img = torch.clamp(img,min=0.0,max=255.0)
+        img = torch.clamp(img,min=0.0,max=1.0)
         img_rgb[contador]=img
         del img
         torch.cuda.empty_cache()
@@ -427,5 +340,4 @@ def En_equal(img_rgb):
     img_rgb: torch.Tensor = torch.cat(img_rgb,dim=0)
     img_rgb = img_rgb.to("cpu")
     torch.cuda.empty_cache()
-    
     return img_rgb    
